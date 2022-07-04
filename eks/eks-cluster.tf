@@ -50,19 +50,6 @@ resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   role       = aws_iam_role.cluster.name
 }
 
-resource "aws_iam_policy" "worker_policy" {
-  name        = "${var.project}-cluster-worker-policy"
-  description = "Worker policy for the ALB Ingress"
-
-  policy = file("iam-policy.json")
-}
-
-# resource "aws_iam_role_policy_attachment" "cluster_worker_policy" {
-#   policy_arn = aws_iam_policy.worker_policy.arn
-#   role       = aws_iam_role.cluster.name
-# }
-
-
 # EKS Cluster Security Group
 resource "aws_security_group" "eks_cluster" {
   name        = "${var.project}-cluster-sg"

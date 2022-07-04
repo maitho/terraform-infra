@@ -6,7 +6,7 @@ resource "aws_eks_node_group" "this" {
   subnet_ids      = aws_subnet.private[*].id
 
   scaling_config {
-    desired_size = 2
+    desired_size = 3
     max_size     = 5
     min_size     = 1
   }
@@ -70,10 +70,10 @@ resource "aws_iam_policy" "node_worker_policy" {
   policy = file("iam-policy.json")
 }
 
-# resource "aws_iam_role_policy_attachment" "worker_policy" {
-#   policy_arn = aws_iam_policy.node_worker_policy.arn
-#   role       = aws_iam_role.node.name
-# }
+resource "aws_iam_role_policy_attachment" "worker_policy" {
+  policy_arn = aws_iam_policy.node_worker_policy.arn
+  role       = aws_iam_role.node.name
+}
 
 # EKS Node Security Group
 resource "aws_security_group" "eks_nodes" {
