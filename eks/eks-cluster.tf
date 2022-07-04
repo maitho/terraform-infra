@@ -1,6 +1,6 @@
 # EKS Cluster
 resource "aws_eks_cluster" "this" {
-  name     = "${var.project}-Cluster"
+  name     = "${var.project}-cluster"
   role_arn = aws_iam_role.cluster.arn
   version  = "1.21"
 
@@ -49,7 +49,6 @@ resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.cluster.name
 }
-
 
 # EKS Cluster Security Group
 resource "aws_security_group" "eks_cluster" {
